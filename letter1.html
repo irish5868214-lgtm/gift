@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Babe!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pyidaungsu&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f1f1f1;
+            margin: 0;
+            font-family: 'Indie Flower', cursive;
+            padding: 20px;
+            overflow: hidden; /* စာရွက်ထွက်လာရင် scroll မဖြစ်အောင် */
+        }
+
+        .header-text {
+            font-size: clamp(24px, 6vw, 40px);
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            width: 300px; /* စာအိတ်အကျယ်ကို ညှိထားပါတယ် */
+            height: 200px; /* စာအိတ်အမြင့် */
+            transition: margin-top 0.5s;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #f0707c;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        /* စာအိတ်အဖုံး (Top Flap) */
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 4;
+            border-top: 110px solid #f68c96; 
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+
+        /* စာအိတ်ကိုယ်ထည် (Front Side) */
+        .envelope::after {
+            content: "";
+            position: absolute;
+            z-index: 3;
+            width: 0;
+            height: 0;
+            border-top: 100px solid transparent;
+            border-left: 150px solid #f6a1aa;
+            border-right: 150px solid #f6a1aa;
+            border-bottom: 100px solid #f6a1aa;
+            bottom: 0;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: #d12d3c;
+            z-index: 5;
+            clip-path: path('M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.147 12-15.809 0-4.011-3.095-6.181-6.274-6.181');
+            transition: opacity 0.3s;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 5px;
+            left: 5%;
+            width: 90%;
+            height: 85%;
+            background: white;
+            padding: 15px;
+            box-sizing: border-box;
+            z-index: 2;
+            transition: transform 0.5s ease, height 0.5s ease;
+            text-align: center;
+            border-radius: 5px;
+            font-family: 'Pyidaungsu', serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .letter p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #444;
+            margin: 0;
+        }
+
+        /* ဖွင့်လိုက်တဲ့အချိန် အကျိုးသက်ရောက်မှု */
+        .envelope-wrapper.open {
+            margin-top: 100px;
+        }
+
+        .envelope-wrapper.open .envelope::before {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        .envelope-wrapper.open .letter {
+            transform: translateY(-160px); /* စာရွက်တက်လာမယ့် အမြင့်ကို ညှိထားပါတယ် */
+            z-index: 4;
+            height: 220px; /* စာရွက်အရှည် */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .envelope-wrapper.open .heart {
+            opacity: 0;
+        }
+
+        .footer-text {
+            font-size: 18px;
+            margin-top: 30px;
+            color: #777;
+        }
+
+        @media (max-width: 400px) {
+            .envelope-wrapper {
+                width: 260px;
+                height: 180px;
+            }
+            .envelope::before, .envelope::after {
+                border-left-width: 130px;
+                border-right-width: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-text">hey babe!</div>
+
+    <div class="envelope-wrapper" onclick="toggleLetter()">
+        <div class="envelope">
+            <div class="heart"></div>
+            <div class="letter">
+                <p>To my beloved 💕  <br>
+   l who never believed in love at first sight or instant crushes, fell in love with you without ever seeing or meeting you, just after stumbling upon your story 💗🍀</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-text">you've got a new message</div>
+
+    <script>
+        function toggleLetter() {
+            document.querySelector('.envelope-wrapper').classList.toggle('open');
+        }
+    </script>
+
+</body>
+</html>
