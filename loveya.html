@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love You 🤎</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Poppins,sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      background:linear-gradient(135deg,#fdf6ec,#f5e6d3,#fff8f0);
+    }
+
+    .card{
+      width:90%;
+      max-width:420px;
+      background:#fff8f0;
+      padding:30px 25px;
+      border-radius:30px;
+      text-align:center;
+      border:3px solid #8b5e3c;
+      box-shadow:0 10px 30px rgba(92,51,23,0.2);
+      position:relative;
+      z-index:10;
+    }
+
+    h1{
+      color:#d4af37;
+      font-size:2.2rem;
+      margin-bottom:15px;
+    }
+
+    p{
+      color:#b8860b;
+      line-height:1.7;
+      margin-bottom:20px;
+    }
+
+    .gif{
+      width:180px;
+      height:180px;
+      object-fit:cover;
+      border-radius:20px;
+      border:4px solid #8b5e3c;
+      margin-bottom:20px;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:15px;
+      margin-top:15px;
+      flex-wrap:nowrap;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+      transition:0.25s;
+      font-weight:600;
+      padding:12px 24px;
+      border-radius:14px;
+      font-size:1rem;
+    }
+
+    #yesBtn{
+      background:#5c3317;
+      color:#d4af37;
+      border:3px solid #c89b3c;
+    }
+
+    #yesBtn:hover{
+      transform:scale(1.05);
+    }
+
+    #noBtn{
+      background:#fff;
+      color:#5c3317;
+      border:2px solid #5c3317;
+    }
+
+    .loveText-container{
+      display:none;
+      margin-top:22px;
+      animation:pop .4s ease;
+    }
+
+    .loveText{
+      background:#fff3e4;
+      border:2px dashed #8b5e3c;
+      padding:18px;
+      border-radius:18px;
+      color:#b8860b;
+      line-height:1.8;
+      font-weight:600;
+    }
+
+    .heart{
+      position:absolute;
+      font-size:24px;
+      animation:float 5s linear infinite;
+      opacity:0.8;
+      z-index:1;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(0);
+        opacity:1;
+      }
+
+      100%{
+        transform:translateY(-110vh);
+        opacity:0;
+      }
+    }
+
+    @keyframes pop{
+      from{
+        transform:scale(.5);
+        opacity:0;
+      }
+
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h1>Love You 🤎</h1>
+
+    <p>
+      ကျွန်တော့်ကို စဉ်းစားပေးနိုင်မလား 🥺
+    </p>
+
+    <img
+      class="gif"
+      src="1.jpg"
+      alt="Love"
+      onerror="this.src='https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif'"
+    >
+
+    <div class="buttons">
+      <button id="yesBtn">Yesss 🤎</button>
+      <button id="noBtn">Nooo 😭</button>
+    </div>
+
+    <div class="loveText-container" id="loveAction">
+      <div class="loveText">
+       အမ အချိန်တစ်ခုစောင့်ခိုင်ထားတဲ့အပေါ် ကျွန်တော်တကယ်ပဲလေး"နက်"နဲ့စိတ်ရှည်"စောင့်နေပေးမှာပါဗျ ဒါပေမဲ့ကျွန်တော့်ဘက်က အမကိုတကယ်စိတ်ရင်းနဲ့အလေးအနက်ထားတာမို့လို့ စိတ်မထိန်းနိုင်ဘဲ ဒီ websiteလေးကတစ်ဆင့်ဖွင့်ပြောမိတာပါဗျ ကျွန်တော်စောင့်နေတာကိုခွင့်ပြုတယ်မလားဟင်🥺🤎
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const loveAction = document.getElementById("loveAction");
+
+    let yesSize = 1;
+
+    // YES BUTTON
+    yesBtn.addEventListener("click", () => {
+
+      loveAction.style.display = "block";
+
+      noBtn.style.display = "none";
+
+    });
+
+    // NO BUTTON
+    noBtn.addEventListener("click", () => {
+
+      yesSize += 4;
+
+      yesBtn.style.padding =
+        (12 + yesSize) + "px " +
+        (24 + yesSize * 2) + "px";
+
+      yesBtn.style.fontSize =
+        (16 + yesSize * 0.5) + "px";
+
+    });
+
+    // FLOATING HEARTS
+    function createHeart(){
+
+      const heart = document.createElement("div");
+
+      heart.classList.add("heart");
+
+      heart.innerHTML = "🤎";
+
+      heart.style.left = Math.random() * 100 + "vw";
+
+      heart.style.bottom = "-20px";
+
+      heart.style.animationDuration =
+        (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      },6000);
+    }
+
+    setInterval(createHeart,500);
+
+  </script>
+
+</body>
+</html>
